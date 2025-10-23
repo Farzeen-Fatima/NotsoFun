@@ -1,0 +1,218 @@
+// Stack (using Array)
+
+//Supports: Push, Pop, Peek, Display.
+
+#include <iostream>
+using namespace std;
+
+#define SIZE 5
+int stack[SIZE];
+int top = -1;
+
+void push(int val) {
+    if (top == SIZE - 1)
+        cout << "Stack Overflow\n";
+    else
+        stack[++top] = val;
+}
+
+void pop() {
+    if (top == -1)
+        cout << "Stack Underflow\n";
+    else
+        cout << "Popped: " << stack[top--] << endl;
+}
+
+void peek() {
+    if (top == -1)
+        cout << "Stack Empty\n";
+    else
+        cout << "Top Element: " << stack[top] << endl;
+}
+
+void display() {
+    if (top == -1) {
+        cout << "Stack Empty\n";
+        return;
+    }
+    cout << "Stack elements: ";
+    for (int i = top; i >= 0; i--)
+        cout << stack[i] << " ";
+    cout << endl;
+}
+
+int main() {
+    int ch, val;
+    do {
+        cout << "\n1.Push 2.Pop 3.Peek 4.Display 5.Exit\n";
+        cin >> ch;
+        switch (ch) {
+            case 1: cout << "Enter value: "; cin >> val; push(val); break;
+            case 2: pop(); break;
+            case 3: peek(); break;
+            case 4: display(); break;
+        }
+    } while (ch != 5);
+}
+STACK (using Array) – Tricky
+1?? Check for balanced parentheses
+#include <iostream>
+using namespace std;
+#define SIZE 50
+
+char stack[SIZE];
+int top = -1;
+
+void push(char c) { stack[++top] = c; }
+char pop() { return stack[top--]; }
+
+bool isBalanced(char exp[]) {
+    for (int i = 0; exp[i] != '\0'; i++) {
+        char ch = exp[i];
+        if (ch == '(' || ch == '{' || ch == '[') push(ch);
+        else if (ch == ')' || ch == '}' || ch == ']') {
+            if (top == -1) return false;
+            char last = pop();
+            if ((ch == ')' && last != '(') || 
+                (ch == '}' && last != '{') || 
+                (ch == ']' && last != '['))
+                return false;
+        }
+    }
+    return top == -1;
+}
+
+int main() {
+    char exp[50];
+    cout << "Enter expression: ";
+    cin >> exp;
+    if (isBalanced(exp)) cout << "Balanced\n";
+    else cout << "Not Balanced\n";
+}
+
+// Reverse a string using stack
+#include <iostream>
+#include <cstring>
+using namespace std;
+#define SIZE 50
+
+char stack[SIZE];
+int top = -1;
+
+void push(char c) { stack[++top] = c; }
+char pop() { return stack[top--]; }
+
+int main() {
+    char str[50];
+    cout << "Enter string: ";
+    cin >> str;
+    for (int i = 0; i < strlen(str); i++)
+        push(str[i]);
+    cout << "Reversed: ";
+    while (top != -1)
+        cout << pop();
+    cout << endl;
+}
+STACK (using Array) – Tricky
+//Check for balanced parentheses
+#include <iostream>
+using namespace std;
+#define SIZE 50
+
+char stack[SIZE];
+int top = -1;
+
+void push(char c) { stack[++top] = c; }
+char pop() { return stack[top--]; }
+
+bool isBalanced(char exp[]) {
+    for (int i = 0; exp[i] != '\0'; i++) {
+        char ch = exp[i];
+        if (ch == '(' || ch == '{' || ch == '[') push(ch);
+        else if (ch == ')' || ch == '}' || ch == ']') {
+            if (top == -1) return false;
+            char last = pop();
+            if ((ch == ')' && last != '(') || 
+                (ch == '}' && last != '{') || 
+                (ch == ']' && last != '['))
+                return false;
+        }
+    }
+    return top == -1;
+}
+
+int main() {
+    char exp[50];
+    cout << "Enter expression: ";
+    cin >> exp;
+    if (isBalanced(exp)) cout << "Balanced\n";
+    else cout << "Not Balanced\n";
+}
+
+//Stack using Linked List
+
+
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+Node* top = NULL;   // top of stack
+
+void push(int val) {
+    Node* newNode = new Node();
+    newNode->data = val;
+    newNode->next = top;
+    top = newNode;
+    cout << val << " pushed to stack\n";
+}
+
+void pop() {
+    if (top == NULL) {
+        cout << "Stack Underflow\n";
+        return;
+    }
+    cout << "Popped: " << top->data << endl;
+    Node* temp = top;
+    top = top->next;
+    delete temp;
+}
+
+void peek() {
+    if (top == NULL)
+        cout << "Stack Empty\n";
+    else
+        cout << "Top Element: " << top->data << endl;
+}
+
+void display() {
+    if (top == NULL) {
+        cout << "Stack Empty\n";
+        return;
+    }
+    Node* temp = top;
+    cout << "Stack elements: ";
+    while (temp != NULL) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+int main() {
+    int ch, val;
+    do {
+        cout << "\n1.Push 2.Pop 3.Peek 4.Display 5.Exit\n";
+        cin >> ch;
+        switch (ch) {
+            case 1: cout << "Enter value: "; cin >> val; push(val); break;
+            case 2: pop(); break;
+            case 3: peek(); break;
+            case 4: display(); break;
+        }
+    } while (ch != 5);
+}
+
