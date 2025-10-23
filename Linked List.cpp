@@ -205,7 +205,7 @@ int main() {
         }
     } while (ch != 7);
 }
-//SINGLY LINKED LIST – Advanced (Tricky) Programs
+//SINGLY LINKED LIST â€“ Advanced (Tricky) Programs
 //Search an element
 #include <iostream>
 using namespace std;
@@ -443,7 +443,7 @@ int main() {
     display(merged);
 }
 
-// DOUBLY LINKED LIST – Tricky
+// DOUBLY LINKED LIST â€“ Tricky
 // Reverse a doubly linked list
 #include <iostream>
 using namespace std;
@@ -483,4 +483,58 @@ int main() {
     cout << "Before: "; display();
     reverseDLL();
     cout << "After: "; display();
+}
+// Linked List â€“ Tricky Bonus Programs
+// a) Find Nth Node from the End
+int findNthFromEnd(Node* head, int n) {
+    Node* first = head;
+    Node* second = head;
+    for (int i = 0; i < n; i++) {
+        if (!first) return -1;
+        first = first->next;
+    }
+    while (first) {
+        first = first->next;
+        second = second->next;
+    }
+    return second->data;
+}
+
+// b) Find Intersection Point of Two Linked Lists
+int getCount(Node* head) {
+    int count = 0;
+    while (head) {
+        count++;
+        head = head->next;
+    }
+    return count;
+}
+
+int getIntersection(Node* head1, Node* head2) {
+    int c1 = getCount(head1);
+    int c2 = getCount(head2);
+    int d = abs(c1 - c2);
+
+    Node *longer = (c1 > c2) ? head1 : head2;
+    Node *shorter = (c1 > c2) ? head2 : head1;
+
+    for (int i = 0; i < d; i++) longer = longer->next;
+
+    while (longer && shorter) {
+        if (longer == shorter) return longer->data;
+        longer = longer->next;
+        shorter = shorter->next;
+    }
+    return -1;
+}
+
+// c) Delete Alternate Nodes
+void deleteAlternate(Node* head) {
+    Node* curr = head;
+    while (curr && curr->next) {
+        Node* temp = curr->next;
+        curr->next = temp->next;
+        delete temp;
+        curr = curr->next;
+    }
 }
