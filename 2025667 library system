@@ -48,7 +48,7 @@ int main() {
         }
     } while (ch != 4);
 }
-QUEUE (using Array) – Tricky
+QUEUE (using Array) â€“ Tricky
 1?? Circular Queue
 #include <iostream>
 using namespace std;
@@ -175,7 +175,7 @@ void displayQueueLL() {
     }
     cout << endl;
 }
-// Queue – Tricky Problems
+// Queue â€“ Tricky Problems
 //a) Circular Queue Using Array
 #define MAXQ 5
 int cq[MAXQ];
@@ -233,7 +233,7 @@ void dequeueP() {
         pq[i] = pq[i + 1];
     sizePQ--;
 }
-//Queue – Bonus/Tricky Programs
+//Queue â€“ Bonus/Tricky Programs
 //Reverse a Queue Using Recursion
 struct NodeQ {
     int data;
