@@ -54,7 +54,7 @@ int main() {
         }
     } while (ch != 5);
 }
-STACK (using Array) – Tricky
+STACK (using Array) â€“ Tricky
 1?? Check for balanced parentheses
 #include <iostream>
 using namespace std;
@@ -113,7 +113,7 @@ int main() {
         cout << pop();
     cout << endl;
 }
-STACK (using Array) – Tricky
+STACK (using Array) â€“ Tricky
 //Check for balanced parentheses
 #include <iostream>
 using namespace std;
@@ -215,4 +215,66 @@ int main() {
         }
     } while (ch != 5);
 }
+// Stack â€“ Bonus/Tricky Programs
+// a) Infix to Postfix Conversion
+#define MAX 100
+char stack[MAX];
+int top = -1;
+
+void push(char c) { stack[++top] = c; }
+char pop() { return stack[top--]; }
+int prec(char c) {
+    if (c == '^') return 3;
+    if (c == '*' || c == '/') return 2;
+    if (c == '+' || c == '-') return 1;
+    return -1;
+}
+
+void infixToPostfix(char* exp) {
+    char output[100];
+    int k = 0;
+    for (int i = 0; exp[i]; i++) {
+        char c = exp[i];
+        if (isalnum(c)) output[k++] = c;
+        else if (c == '(') push(c);
+        else if (c == ')') {
+            while (top != -1 && stack[top] != '(')
+                output[k++] = pop();
+            pop(); // remove '('
+        } else {
+            while (top != -1 && prec(stack[top]) >= prec(c))
+                output[k++] = pop();
+            push(c);
+        }
+    }
+    while (top != -1) output[k++] = pop();
+    output[k] = '\0';
+    cout << "Postfix: " << output << endl;
+}
+
+// b) Evaluate Postfix Expression
+int s[MAX];
+int topEval = -1;
+
+void pushEval(int val) { s[++topEval] = val; }
+int popEval() { return s[topEval--]; }
+
+int evaluatePostfix(char* exp) {
+    for (int i = 0; exp[i]; i++) {
+        char c = exp[i];
+        if (isdigit(c)) pushEval(c - '0');
+        else {
+            int val2 = popEval();
+            int val1 = popEval();
+            switch (c) {
+                case '+': pushEval(val1 + val2); break;
+                case '-': pushEval(val1 - val2); break;
+                case '*': pushEval(val1 * val2); break;
+                case '/': pushEval(val1 / val2); break;
+            }
+        }
+    }
+    return popEval();
+}
+
 
